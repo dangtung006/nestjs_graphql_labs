@@ -4,6 +4,7 @@ import { Repository } from 'typeorm';
 import { Student } from './student.entity';
 import { CreateStudentInput } from './student.input';
 import { v4 as uuid } from 'uuid';
+import { In } from 'typeorm'
 
 
 @Injectable()
@@ -30,5 +31,10 @@ export class StudentService {
     async getStudent(_id: string): Promise<Student>{
         let data = await this.studentRepository.findOneBy({ id : _id });
         return data;
+    }
+
+    async getStudentByIds(studentIds : string[]): Promise<Student[]>{
+        let students = await this.studentRepository.findBy({ id : In(studentIds) })
+        return students;
     }
 }
