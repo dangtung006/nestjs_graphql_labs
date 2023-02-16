@@ -1,8 +1,14 @@
-import { Entity, ObjectIdColumn, PrimaryColumn } from 'typeorm';
+import { InputType, Field } from '@nestjs/graphql';
+import { MinLength } from 'class-validator';
 
-export class Student {
-    _id: string;
-    id : string;
+@InputType()
+export class CreateStudentInput {
+    
+    @MinLength(1)
+    @Field()
     firstName : string;
-    lastName : string;
+
+    @MinLength(1)
+    @Field()
+    lastName: string;
 }
